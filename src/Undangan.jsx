@@ -3,18 +3,22 @@ import { useState } from "react";
 export default function Undangan() {
     const [nama, setNama] = useState("");
     const [panggilan, setPanggilan] = useState("");
-    const [sesi, setSesi] = useState("1");
     const [copied, setCopied] = useState(false);
+    const [copiedText, setCopiedText] = useState(false);
 
     const defaultNama = "tamu undangan";
     const defaultPanggilan = "Bapak/Ibu Saudara/i";
 
-    const url = `https://walimah-anang-ais.vercel.app/?kpd=${encodeURIComponent((nama || defaultNama).toLowerCase())}&p=${encodeURIComponent((panggilan || defaultPanggilan).toLowerCase())}`;
+    const formattedNama = (nama || defaultNama).toLowerCase();
+    const formattedPanggilan = (panggilan || defaultPanggilan).toLowerCase();
+    const url = `https://walimah-ais-anang.vercel.app/?kpd=${encodeURIComponent(formattedNama)}&p=${encodeURIComponent(formattedPanggilan)}`;
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(url);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+    const invitationText = `Kepada Yth. ${panggilan || defaultPanggilan}\n${nama || defaultNama}\n\n_____________________\n\nAssalamualaikum Warahmatullahi Wabarakatuh\n\nTanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan anak kami.\n\nBerikut link undangan kami, untuk info lengkap dari acara, bisa kunjungi:\n\n🔗 ${url}\n\nMerupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.\n\nWassalamualaikum Warahmatullahi Wabarakatuh\n\nHormat kami,\nNgadi (Alm) & Warni`;
+
+    const copyToClipboard = (text, setCopiedState) => {
+        navigator.clipboard.writeText(text);
+        setCopiedState(true);
+        setTimeout(() => setCopiedState(false), 2000);
     };
 
     const resetForm = () => {
@@ -47,24 +51,37 @@ export default function Undangan() {
                             onChange={(e) => setPanggilan(e.target.value)}
                         />
                     </div>
+                    
                 </form>
                 <div className="mt-4 p-3 border rounded-lg bg-gray-100 text-center break-all">
                     {url}
                 </div>
                 <div className="relative mt-2">
                     <button 
-                        onClick={copyToClipboard} 
-                        className="w-full bg-lime-700 text-white py-2 rounded-lg hover:bg-lime-800"
+                        onClick={() => copyToClipboard(url, setCopied)} 
+                        className="w-full bg-yellow-700 text-white py-2 rounded-lg hover:bg-yellow-800"
                     >
                         Copy Link
                     </button>
                     {copied && <span className="absolute left-1/2 transform -translate-x-1/2 mt-2 bg-gray-800 text-white text-xs rounded py-1 px-2">Tautan telah disalin.</span>}
                 </div>
+                <div className="mt-4 p-3 border rounded-lg bg-gray-100 text-left text-sm whitespace-pre-wrap max-h-40 overflow-y-scroll overflow-x-hidden">
+                    {invitationText}
+                </div>
+                <div className="relative mt-2">
+                    <button 
+                        onClick={() => copyToClipboard(invitationText, setCopiedText)} 
+                        className="w-full bg-yellow-700 text-white py-2 rounded-lg hover:bg-yellow-800"
+                    >
+                        Copy Undangan
+                    </button>
+                    {copiedText && <span className="absolute left-1/2 transform -translate-x-1/2 mt-2 bg-gray-800 text-white text-xs rounded py-1 px-2">Undangan telah disalin.</span>}
+                </div>
                 <button 
                     onClick={resetForm} 
-                    className="w-full bg-yellow-700 text-white py-2 rounded-lg hover:bg-yellow-800 mt-2"
+                    className="w-full bg-yellow-800 text-white py-2 rounded-lg hover:bg-yellow-900 mt-2"
                 >
-                    Isi Lagi
+                    Reset
                 </button>
             </div>
         </section>
