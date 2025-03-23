@@ -75,10 +75,9 @@ export default function Experience() {
 
     return (
         <div className="relative font-delius max-w-[500px]">
-            {/* Background global */}
-            <div className="fixed inset-0 bg-[url('/bg.jpg')] bg-contain bg-center bg-repeat-y opacity-20 -z-10"></div>
-            
             {isAdmin && <Undangan/>}
+
+            {!isAdmin && <><div className="fixed inset-0 bg-[url('/bg.jpg')] bg-contain bg-center bg-repeat-y opacity-20 -z-10"></div>
             <Hero enableScroll={enableScroll} heroRef={heroRef} />
             <Navbar isScrollEnabled={isScrollEnabled} />
             <Home />
@@ -96,7 +95,6 @@ export default function Experience() {
             <DoaSection />
             <Footer />
 
-            {/* Tombol Play/Pause */}
             <button 
                 onClick={toggleAudio} 
                 className={`${isScrollEnabled ? "opacity-1" : "opacity-0"} fixed bottom-16 right-5 bg-amber-800 text-white p-5 rounded-full shadow-lg transition-all duration-300 active:scale-90`}
@@ -104,7 +102,7 @@ export default function Experience() {
                 <div className={isPlaying ? "animate-spin-slow" : ""}>
                     {isPlaying ? <PauseIcon className="w-6 h-6" /> : <PlayIcon className="w-6 h-6" />}
                 </div>
-            </button>
+            </button></>}
         </div>
     );
 }
