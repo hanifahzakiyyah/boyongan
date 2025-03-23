@@ -8,12 +8,21 @@ export default function Undangan() {
 
     const defaultNama = "tamu undangan";
     const defaultPanggilan = "Bapak/Ibu Saudara/i";
+    const toTitleCase = (str) => {
+        if (!str) return "";
+      
+        const exceptions = ["TPQ", "SMA", "SMP", "SD", "MI", "MTS", "MA", "PAUD", "TK"];
+        return str
+          .split(" ")
+          .map(word => exceptions.includes(word.toUpperCase()) ? word.toUpperCase() : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(" ");
+      };
 
     const formattedNama = (nama || defaultNama).toLowerCase();
     const formattedPanggilan = (panggilan || defaultPanggilan).toLowerCase();
     const url = `https://walimah-ais-anang.vercel.app/?kpd=${encodeURIComponent(formattedNama)}&p=${encodeURIComponent(formattedPanggilan)}`;
 
-    const invitationText = `Kepada Yth. ${panggilan || defaultPanggilan}\n${nama || defaultNama}\n\n_____________________\n\nAssalamualaikum Warahmatullahi Wabarakatuh\n\nTanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan anak kami.\n\nBerikut link undangan kami, untuk info lengkap dari acara, bisa kunjungi:\n\n🔗 ${url}\n\nMerupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.\n\nWassalamualaikum Warahmatullahi Wabarakatuh\n\nHormat kami,\nNgadi (Alm) & Warni`;
+    const invitationText = `Kepada Yth. ${toTitleCase(panggilan) || defaultPanggilan}\n${toTitleCase(nama) || defaultNama}\n\n_____________________\n\nAssalamualaikum Warahmatullahi Wabarakatuh\n\nTanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan anak kami.\n\nBerikut link undangan kami, untuk info lengkap dari acara, bisa kunjungi:\n\n🔗 ${url}\n\nMerupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.\n\nWassalamualaikum Warahmatullahi Wabarakatuh\n\nHormat kami,\nNgadi (Alm) & Warni`;
 
     const copyToClipboard = (text, setCopiedState) => {
         navigator.clipboard.writeText(text);
