@@ -50,7 +50,7 @@ const Home = () => {
           Aisyah & Anang
         </h3>
         <h4 data-aos="fade-up" data-aos-duration="2000" className="text-xl">
-          Jum'at, 11 April 2025
+          Selasa, 15 April 2025
         </h4>
 
         {/* Countdown Timer */}
