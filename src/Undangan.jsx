@@ -8,9 +8,8 @@ export default function Undangan() {
 
     const defaultNama = "tamu undangan";
     const defaultPanggilan = "Bapak/Ibu Saudara/i";
-    const defaultSesi = "1";
 
-    const url = `https://walimah-ais-anang.vercel.app/?kpd=${encodeURIComponent((nama || defaultNama).toLowerCase())}&p=${encodeURIComponent((panggilan || defaultPanggilan).toLowerCase())}&sesi=${sesi || defaultSesi}`;
+    const url = `https://walimah-anang-ais.vercel.app/?kpd=${encodeURIComponent((nama || defaultNama).toLowerCase())}&p=${encodeURIComponent((panggilan || defaultPanggilan).toLowerCase())}`;
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(url);
@@ -21,7 +20,6 @@ export default function Undangan() {
     const resetForm = () => {
         setNama("");
         setPanggilan("");
-        setSesi("1");
     };
 
     return (
@@ -48,17 +46,6 @@ export default function Undangan() {
                             value={panggilan} 
                             onChange={(e) => setPanggilan(e.target.value)}
                         />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium">Sesi</label>
-                        <select 
-                            className="w-full border rounded-lg p-2" 
-                            value={sesi} 
-                            onChange={(e) => setSesi(e.target.value)}
-                        >
-                            <option value="1">Sesi 1</option>
-                            <option value="2">Sesi 2</option>
-                        </select>
                     </div>
                 </form>
                 <div className="mt-4 p-3 border rounded-lg bg-gray-100 text-center break-all">

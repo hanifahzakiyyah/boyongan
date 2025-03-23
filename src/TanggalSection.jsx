@@ -1,17 +1,6 @@
 import { MapPinIcon, ClockIcon, CalendarDaysIcon } from "@heroicons/react/24/solid";
-import { useEffect, useState } from "react";
 
 const TanggalSection = () => {
-  const [sesi, setSesi] = useState("");
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const sesiParam = params.get("sesi");
-  
-    if (sesiParam) {
-      setSesi(sesiParam);
-    }
-  }, []); 
   
 
   return (
@@ -33,25 +22,24 @@ const TanggalSection = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <CalendarDaysIcon className="w-8 h-8 text-orange-800 mx-auto" />
-                <p className="mt-2 text-lg">Jum'at, 11 April 2025</p>
+                <p className="mt-2 text-lg">Selasa, 15 April 2025</p>
               </div>
               <div>
                 <ClockIcon className="w-8 h-8 text-orange-800 mx-auto" />
                 <p className="mt-2 text-lg">
-                  {sesi === "1" ? "09:00 - 10:00 WIB" : "09:30 - 10:30 WIB" }
+                  "09:00 - selesai WIB"
                 </p>
               </div>
               
             </div>
             <div>
               <p className="text-lg mt-10" data-aos="fade-up-left" data-aos-duration="2000">
-                Yang bertempat di: <br /> Waroeng Omah Sawah <br />
-                Miri, Timbulharjo, Kec. Sewon, Kabupaten Bantul,
-                Daerah Istimewa Yogyakarta 55185
+                Yang bertempat di: <br />
+                Talun, Jati, Sawangan, Magelang, Jawa Tengah
               </p>
               <p data-aos="fade-up-left" data-aos-duration="2000" className="mt-4">
                 <a 
-                  href="https://maps.app.goo.gl/PgeDd7GqPQa9ccXC8" 
+                  href="https://goo.gl/maps/mU4ugfgWcuLHZzwm6?g_st=aw" 
                   target="_blank" 
                   className="inline-flex items-center gap-2 px-6 py-3 text-lg font-semibold text-white bg-yellow-700 rounded-lg shadow-md hover:bg-orange-500 transition">
                   <MapPinIcon className="w-6 h-6" /> Klik Map
